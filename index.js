@@ -151,7 +151,7 @@ app.post('/api/complaints', async (req, res) => {
         await complaint.save();
         const notification = new Notification({
             userId: '66fa2550e5911c9efdf4f2ad', // Assuming assignedTo is the agent's user ID
-            url: `https://localhost:3000/assigncomplaint`,
+            url: `https://complaintss.vercel.app/assigncomplaint`,
             message: `New complaint has registered: ${description}`
         });
         await notification.save();
@@ -200,14 +200,14 @@ app.patch('/api/allcomplaints/:id', async (req, res) => {
         }
         const notification = new Notification({
             userId: assignedTo, // Assuming assignedTo is the agent's user ID
-            url: `https://localhost:3000/complaintdetails/${id}`,
+            url: `https://complaintss.vercel.app/complaintdetails/${id}`,
             message: `You have been assigned a new complaint: ${updatedComplaint.description}`
         });
         await notification.save();
 
         const usernotification = new Notification({
             userId: updatedComplaint.userId, // Assuming assignedTo is the agent's user ID
-            url: `https://localhost:3000/complaintdetails/${id}`,
+            url: `https://complaintss.vercel.app/complaintdetails/${id}`,
             message: `Your complaint has been assigned to agent: ${updatedComplaint.description}`
         });
         await usernotification.save();
@@ -366,7 +366,7 @@ app.put('/api/updatecomplaint/:id', async (req, res) => {
         }
         const notification = new Notification({
             userId: updatedComplaint.userId, // Assuming assignedTo is the agent's user ID
-            url: `https://localhost:3000/complaintdetails/${id}`,
+            url: `https://complaintss.vercel.app/complaintdetails/${id}`,
             message: `Your complaint has been resolved: ${updatedComplaint.description}`
         });
         await notification.save();

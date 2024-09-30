@@ -6,6 +6,19 @@ const cors = require('cors'); // Import CORS
 // Create the express app
 const app = express();
 
+const cron = require('node-cron');
+const axios = require('axios');
+
+// Set up a cron job to ping the URL every 14 minutes
+cron.schedule('*/14 * * * *', async () => {
+    try {
+        const response = await axios.get('https://cback-p76y.onrender.com/api/assignedcomplaints');
+        console.log('Ping successful:', response.data);
+    } catch (error) {
+        console.error('Error pinging the URL:', error.message);
+    }
+});
+
 // Middleware to enable CORS
 app.use(cors()); // Allow requests from any origin
 app.use(express.json()); // Middleware to parse incoming JSON requests

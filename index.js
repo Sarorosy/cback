@@ -412,7 +412,7 @@ app.get('/api/admin/stats', async (req, res) => {
         const totalUsers = await User.countDocuments({role:'user'});
         const totalAgents = await User.countDocuments({role:'agent'});
         const pendingComplaints = await Complaint.countDocuments({ status: 'pending' });
-        const resolvedComplaints = await Complaint.countDocuments({ status: 'resolved' });
+        const resolvedComplaints = await Complaint.countDocuments({ status: 'Resolved' });
 
         res.status(200).json({
             totalComplaints,
